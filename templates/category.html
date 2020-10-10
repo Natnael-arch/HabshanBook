@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for i in cate %}
+    {{i.title}}<br/>
+    {{i.author}}
+{% endfor %}
+{% endblock content %}
