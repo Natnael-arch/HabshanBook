@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Category, Book
+from .models import Category, Book, Order
 from django.views.generic import ListView
 
 from django.views.generic import DetailView
@@ -19,3 +19,7 @@ def detail_category(request, cats):
         'cate': cat_101
     }
     return render(request, 'category.html', context)
+
+
+def add_cart(request):
+    pass

@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for book in object_list %}
-<div>
-    <h1>{{book.title}}</h1>
-    <h2>{{book.author}}</h2>
-    <button>Sample</button>
-    <button>Add to Cart</button>
-    
-</div>
-{% endfor %}
+{% load static %}
+<div class="row">
+		{% for book in object_list %}
+		<div class="col-lg-4">
+			<img class="thumbnail" src="{{book.image.url}}"/>
+			<div class="box-element product">
+				<h4><strong>{{book.title}}</strong></h4>
+                <h6>{{book.author}}</h6>
+                <hr>
+
+				<button data-product="{{book.id}}" data-action="add"
+						class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+				
+				<a class="btn btn-outline-success" href="#">Sample</a>
+				<h4 style="display: inline-block; float:right"><strong>${{book.price}}</strong></h4>
+
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+
 {% endblock content %}
