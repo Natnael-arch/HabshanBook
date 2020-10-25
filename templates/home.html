@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% block content %}
+
 <div class="row">
 		{% for book in object_list %}
 		<div class="col-lg-4">
@@ -10,12 +11,18 @@
                 <h6>{{book.author}}</h6>
                 <hr>
 
-				<button data-product="{{book.id}}" data-action="add"
-						class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+				<button data-product= "{{book.id}}" data-action="add"
+						class="btn btn-outline-secondary add-btn update-cart" 
+						target="_blank">
+						<a href="{% url 'cart' %}" 
+						style="color: black; text-decoration: none;">
+						ወደ ዘንቢል</a></button>
 				
-				<a class="btn btn-outline-success" href="#">Sample</a>
-				<h4 style="display: inline-block; float:right"><strong>${{book.price}}</strong></h4>
-
+				<a class="btn btn-outline-success" 
+				href="{% url 'detail' book.pk %}">Sample</a>
+				<h4 style="display: inline-block; 
+				float:right; max-width:160px ">{{book.price}} birr</h4>
+                <hr>
 			</div>
 		</div>
 		{% endfor %}

@@ -1,13 +1,42 @@
 {% extends 'base.html' %}
-{% block content %}
-{% for book in cate %}
-  <form method="POST" enctype="multipart/form-data">
-    <img src = "{{book.image.url}}" width="200px" height="200px"/>
-    <p>{{book.title}}</p>
-    <h6>{{book.author}}</h6>
-    <button class="btn btn-success"type="submit">Sample</button>
+{% load static  %}
 
-    <button class="btn btn-outline-secondary"type="submit">Add to cart</button>
-</form>
-{% endfor %}
+{% block content %}
+<style>
+	#cart-icon{
+	width:25px;
+	display: inline-block;
+	margin-left: 15px;
+}
+</style>
+<div class="row">
+		{% for book in cate %}
+		<div class="col-lg-4">
+			<img class="thumbnail" src="{{book.image.url}}" style="width: 100%;
+            height: 200px;
+            -webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+            -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+            box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);"/>
+			<div class="box-element product">
+				<h4><strong>{{book.title}}</strong></h4>
+                <h6>{{book.author}}</h6>
+                <hr>
+
+				<button data-product="{{book.id}}" data-action="add"
+						class="btn btn-outline-secondary add-btn update-cart">
+						ወደ ዘንቢል</button>
+				
+				<a class="btn btn-outline-success" 
+				href="{% url 'detail' book.pk%}">Sample</a>
+				
+				
+				<h4 style="display: inline-block; float: right; max-width:160px ">
+					{{book.price}} birr</h4>
+                <hr>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+
 {% endblock content %}

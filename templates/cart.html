@@ -1,13 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; ተመለስ</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>መፅሃፍት: <strong>{{cart_num}}</strong></h5></th>
+						<th><h5>ጠቀላላ ዋጋ:  <strong>{{price_sum}}</strong></h5></th>
+						<th>
+							<a  style="float:right; margin:5px;" class="btn btn-success" href="">ግዢ</a>
+						</th>
+					</tr>
+				</table>
+
+			</div>
+
+			<br>
+			<table class="table">
+				<tr>
+					<th>መፅሃፍት</th>
+					<th></th>
+					<th>ዋጋ</th>
+					<th>መጠን</th>
+					<th>Total</th>
+				</tr>
+				{% for item in carts %}
+				<tr>
+					<td style="flex:2; width:100px"><img class="row-image" src="{{item.book.image.url}}"></td>
+					<td style="flex:2"><p>{{item.book.title}}</p></td>
+
+					<td style="flex:1"><p>{{item.book.price}}</p></td>
+					<td style="flex:1"><div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity">
+							<img data-product="{{item.book.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+					
+							<img data-product="{{item.book.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+						</div>
+					</div></td>
+				</tr>
+				{% endfor %}
+			</table>
+			
+			</div>
+		</div>
+	</div>
+{% endblock content %}
