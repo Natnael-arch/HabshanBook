@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     # 3rd party
     'crispy_forms',
+    'django_filters',
 ]
 AUTH_USER_MODEL = 'user.CustomUser'
 

@@ -40,22 +40,40 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    def cart_total(self):
+        bookitems = self.bookitems_set.all()
+        total = sum([item.get_total for item in bookitems])
+        return total
+
+    @property
+    def cart_item(self):
+        bookitems = self.bookitems_set.all()
+        total = sum([item.quantity for item in bookitems])
+        return total
+
 
 class BookItems(models.Model):
     book = models.ForeignKey(Book, null=True, blank=True, on_delete=models.SET_NULL)
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
-    quantity = models.PositiveIntegerField(default=0, null=True, blank=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
 
+    @property
+    def get_total(self):
+        total = self.book.price * self.quantity
+        return total
+
+
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)
-    Woreda = models.CharField(max_length=200, null=False)
+    Woreda = models.IntegerField()
     home_num = models.IntegerField()
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.address
+        return str(self.address)
