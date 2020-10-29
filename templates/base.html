@@ -79,6 +79,13 @@ const csrftoken = getToken('csrftoken');
     {% if user.is_authenticated %}
     
     <ul class="navbar-nav ml-auto">
+      <div class="search" style="display: inline-block;
+      margin-top: 10px;width: 289px;">
+      <form method="GET">
+        {{myfilter.form}}
+      <button type="submit">Search</button> 
+    </div>
+      </form>
       <div class="form-inline my-2 my-lg-0">
       <a href="{% url 'cart' %}">
         <img  id="cart-icon" src="{% static 'images/images/cart.png' %}">
@@ -165,7 +172,7 @@ integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm
 integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-<script type = "text/JavaScript" src="{% static 'javascript/add_cart.js' %}"></script>
+<script type = "text/JavaScript" src="{% static 'javascript/the_add_cart.js' %}"></script>
 </body>
 
 </html>

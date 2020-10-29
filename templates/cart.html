@@ -11,8 +11,8 @@
 				<br>
 				<table class="table">
 					<tr>
-						<th><h5>መፅሃፍት: <strong>{{cart_num}}</strong></h5></th>
-						<th><h5>ጠቀላላ ዋጋ:  <strong>{{price_sum}}</strong></h5></th>
+						<th><h5>መፅሃፍት: <strong>{{item_num}}</strong></h5></th>
+						<th><h5>ጠቀላላ ዋጋ:  <strong>{{cart_obj.cart_total|floatformat:2}}</strong></h5></th>
 						<th>
 							<a  style="float:right; margin:5px;" class="btn btn-success" href="">ግዢ</a>
 						</th>
@@ -39,11 +39,17 @@
 					<td style="flex:1"><div style="flex:1">
 						<p class="quantity">{{item.quantity}}</p>
 						<div class="quantity">
-							<img data-product="{{item.book.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+							<img data-product="{{item.book.id}}" data-action="add" 
+							class="chg-quantity update-cart" 
+							src="{% static  'images/arrow-up.png' %}">
 					
-							<img data-product="{{item.book.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+							<img data-product="{{item.book.id}}" 
+							data-action="remove" 
+							class="chg-quantity update-cart" 
+							src="{% static  'images/arrow-down.png' %}">
 						</div>
 					</div></td>
+					<td style="flex:1"><p>{{carts.get_total}}</p></td>
 				</tr>
 				{% endfor %}
 			</table>
