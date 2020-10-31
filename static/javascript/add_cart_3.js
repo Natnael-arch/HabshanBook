@@ -1,6 +1,5 @@
 
 
-
 let updateToCartBtns = document.getElementsByClassName('update-cart');
 let addToCartBtns = document.getElementsByClassName('add-cart');
 
@@ -72,8 +71,14 @@ function updateCart(bookId,action){
 		    location.reload();
 		});
 }
-pbt = document.getElementById("purchase_button");
+pbt = document.getElementsByClassName("purchase")[0];
 pbt.addEventListener("click", function(){
-cart_table = document.getElementsByTagName("td");
-cart_table.innerHTML = "";
+    cart_table = document.getElementsByClassName("purchase-item");
+    
+    for(let i=0; i<cart_table.length;i++){
+  
+        cart_table[i].innerHTML = "";
+       
+    }
+
 }, false)

@@ -1,8 +1,8 @@
 from django import forms
-from .models import ShippingAddress
+from .models import Purchase
 
 
-class ShippingForm(forms.ModelForm):
-    class Meta:
-        model = ShippingAddress
-        fields = ('address', 'city', 'Woreda', 'home_num')
+class PurchaseForm(forms.Form):
+    address = forms.CharField(max_length=100)
+    city = forms.CharField(max_length=100)
+    phone = forms.IntegerField()
