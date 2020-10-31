@@ -8,9 +8,6 @@ from django.urls import reverse_lazy, reverse
 class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
-        return self.user
-
 
 class Book(models.Model):
     CATEGORY = (
@@ -65,15 +62,16 @@ class BookItems(models.Model):
         total = self.book.price * self.quantity
         return total
 
+    def __str__(self):
+        return str(self.book.title)
 
-class ShippingAddress(models.Model):
-    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
-    address = models.CharField(max_length=200, null=False)
-    city = models.CharField(max_length=200, null=False)
-    Woreda = models.IntegerField()
-    home_num = models.IntegerField()
-    date_added = models.DateTimeField(auto_now_add=True)
+
+class Purchase(models.Model):
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.DO_NOTHING)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    phone = models.PositiveBigIntegerField(null=True, blank=False)
 
     def __str__(self):
         return str(self.address)
