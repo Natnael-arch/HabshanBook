@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<style>
+.devpics{
+	width: 117px;
+	height: 143px;
+	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+}
+img{
+    float: left;
+}
+</style>
+<div>
+    <h1>Habeshan bookstore</h1>
+    <p>A Bookstore who is ready to help you find best books out their with fair price and free delivery! </p>
+</div>
+<p>
+<button class="btn btn-success" type="button" data-toggle="collapse" data-target="#developercollapse" aria-expanded="false" aria-controls="collapseExample">
+    Developers
+  </button>
+</p>
+<div class="collapse" id="developercollapse">
+  <div class="card card-body">
+    <p><img src="{% static 'images/images/dev/Nate_B.jpg'%}" class="devpics"/>My Name is <b>Natnael Beshane</b>,
+        I am a Fullstack developer who built this beautifull online Bookstore and will build a lot of beautifull websites with fair price if you contact me </p>
+        <div class="dev_info">Email: </b> natnaelb8@gmail.com</div>
+    </div>
+</div>
+<script type="text/javascript">
+		
+    window.addEventListener("load", function(){
+        search = document.getElementById("not-hidden");
+        search.className = "hidden";
+    })
+</script>
+{% endblock content %}

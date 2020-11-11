@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Book, BookItems, Cart, Purchase
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.decorators import login_required
-
+from copy import deepcopy
 from django.http import JsonResponse
 import json
 from .filter import BookFilter
@@ -87,6 +87,8 @@ def purchase(request):
             phone = form.cleaned_data['phone']
             user = request.user
             cart, ordered = Cart.objects.get_or_create(customer=user)
+            bookitems = cart.bookitems_set.all()
+            book = deepcopy(bookitems)
             purchase, order = Purchase.objects.get_or_create(customer=user,
                                                              cart=cart,
                                                              address=address,
@@ -95,3 +97,16 @@ def purchase(request):
             purchase.save()
 
     return render(request, 'purchase.html', {'form':form})
+
+
+def delete_cart(request):
+    cart = Cart.objects.get(request.user)
+    data = json.loads(request.body)
+    action = data['action']
+    if action == "delete_cart":
+        cart.delete()
+    return JsonResponse('cart deleted', safe=False)
+
+
+def about_us(request):
+    return render(request, "about.html", {})

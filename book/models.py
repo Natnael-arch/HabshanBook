@@ -18,7 +18,7 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     author = models.CharField(max_length=200)
     IBN = models.PositiveSmallIntegerField()
-    category = models.CharField(max_length=50, null=True, blank=True,choices=CATEGORY)
+    category = models.CharField(max_length=50, null=True, blank=True, choices=CATEGORY)
     image = models.ImageField(null=True, blank=True, upload_to='images/')
     price = models.DecimalField(blank=False, null=False, default=0.0, max_digits=10000, decimal_places=2)
 
@@ -68,10 +68,12 @@ class BookItems(models.Model):
 
 class Purchase(models.Model):
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.DO_NOTHING)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     phone = models.PositiveBigIntegerField(null=True, blank=False)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return str(self.address)

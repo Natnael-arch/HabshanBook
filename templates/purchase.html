@@ -3,12 +3,45 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div>
+<div class="not-hidden">
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}
         <button type='submit' style="float: right" class = "btn btn-outline-success purchase" 
-        id="purchase_button">purchase</button>
+        id="purchase_button">Submit</button>
     </form>
 </div>
+<div class="hidden" id="delete_cart" data-action="delete-cart">
+    <h1>You will hear from us with in two days</h1>
+    <button><a href="{% url 'home' %}">Go back</a></button>
+
+</div>
+<script type="text/javascript">		
+    window.addEventListener("load", function(){
+        search = document.getElementById("not-hidden");
+        search.className = "hidden";
+    })//To hide the search button
+
+
+
+    btn = document.getElementById("purchase_button");
+    if(btn.addEventListener){
+        btn.addEventListener("submit", function(){
+            form = document.getElementsByClassName("not-hidden")[0];
+            form.className = "hidden";
+            info = document.getElementsByClassName("hidden")[0];
+            alert(info);
+            info.className = "not-hidden";
+            alert(info)
+        }, false)
+    }else if(btn.attachEvent){
+        btn.attachEvent("onsubmit", function(){
+            form = document.getElementsByClassName("not-hidden")[0];
+            form.className = "hidden";
+            info = document.getElementsByClassName("hidden")[0];
+            info.className = "not-hidden";
+            
+        })
+    }
+</script>
 {% endblock content %}
